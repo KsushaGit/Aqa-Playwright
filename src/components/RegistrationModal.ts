@@ -2,14 +2,14 @@ import { expect,Locator, Page} from '@playwright/test';
 import { BaseComponent } from './BaseComponent';
 
 export class RegForm extends BaseComponent {
-    readonly nameInput: Locator;
-    readonly lastName: Locator;
-    readonly email: Locator;
-    readonly password: Locator;
-    readonly confirmPassword: Locator;
-    readonly regButton: Locator;
-    readonly errorMessageName: Locator;
-    readonly errorUnique: Locator;
+    private readonly nameInput: Locator;
+    private readonly lastName: Locator;
+    private readonly email: Locator;
+    private readonly password: Locator;
+    private readonly confirmPassword: Locator;
+    private readonly regButton: Locator;
+    private readonly errorMessageName: Locator;
+    private readonly errorUnique: Locator;
     
     //readonly errorEmail: Locator;
     //readonly errorPassword: Locator;
@@ -38,6 +38,16 @@ export class RegForm extends BaseComponent {
     async fillLastName(lastName: string){
         await this.lastName.fill(lastName);
     }
+
+     async clickRegButton() {
+    await this.regButton.click();
+}
+   async clickName() {
+    await this.nameInput.click();
+}
+async clickLastName(){
+    await this.lastName.click();
+}
 
     async fillEmail(email: string){
         await this.email.fill(email)

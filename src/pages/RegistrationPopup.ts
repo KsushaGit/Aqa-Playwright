@@ -10,13 +10,20 @@ import {RegForm} from '../components/RegistrationModal';
 //Test → knows WHAT to test (calls page methods)
 
 export class RegistrationPage {
-    private form: RegForm ;
+    private form: RegForm;
 
-    constructor (page: Page){
+    constructor (private readonly page: Page){
 
         this.form = new RegForm(page);
-
     }
+
+ async openRegistrationModal() {  
+ await this.page.goto('/');
+        await this.page.getByRole('button',{name: 'Sign up'}).click();
+        await this.page.locator('.modal-dialog').waitFor({ state: 'visible' });
+    };
+
+
 
     async fillName(name: string) {
         await this.form.fillName(name);
@@ -37,15 +44,17 @@ export class RegistrationPage {
         await this.form.fillConfirmPassword(password);
     }
 
-  async clickRegButton() {
-    await this.form.regButton.click();
-}
-async clickName() {
-    await this.form.nameInput.click();
-}
-async clickLastName(){
-    await this.form.lastName.click();
-}
+    async clickRegButton(){
+        await this.form.clickRegButton();
+    }
+    async clickName(){
+        await this.form.clickName();
+    }
+
+     async clickLastName(){
+        await this.form.clickLastName();
+    }
+
 
     async checkUniqueError(message: string) {
     await this.form.checkUniqueError(message);
