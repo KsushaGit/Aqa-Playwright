@@ -44,16 +44,20 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    {
+  /*  {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-    },
+    }, */
       {
       name: 'setup',
       testDir: './tests',
       testMatch: '**/auth.setup.ts',
     },
-
+{
+  name: 'chromium',
+  testDir: './tests/ui',
+  use: { ...devices['Desktop Chrome'] },
+},
     {
   name: 'ui',
   testDir: './tests/ui',
@@ -70,8 +74,8 @@ export default defineConfig({
     },
 
     {
-      name: 'api2',
-      testDir: './tests/api2',
+      name: 'apifixt',
+      testDir: './tests/api_fixt',
       testMatch: '**/*.spec.ts',
       dependencies: ['setup'],
       use: {

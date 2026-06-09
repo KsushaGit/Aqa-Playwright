@@ -1,8 +1,9 @@
 import { test as base, expect, Page } from '@playwright/test';
 import path from 'path';
+import { GaragePage } from '../../src/pages/GaragePage';
 
 type userGaragePage = {
-  userGaragePage: Page;
+  userGaragePage: GaragePage;
 };
 
 export const test = base.extend<userGaragePage>({
@@ -13,11 +14,12 @@ export const test = base.extend<userGaragePage>({
       storageState: authFile,
     });
     const page = await context.newPage();
+    const garagePage = new GaragePage(page);
     await page.goto('/panel/garage');
     await expect(page).toHaveURL(/panel\/garage/);
 
 
-    await use(page);
+    await use(garagePage);
      await context.close();
   },
   
