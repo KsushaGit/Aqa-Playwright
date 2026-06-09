@@ -1,13 +1,15 @@
 import { test, expect } from '@playwright/test';
+// only test logic here
+test.only ( 'Clicking the Sign Up button', async ({page}) =>{
 
-test ( 'Clicking the Sign Up button', async ({page}) =>{
-
-    await page.goto("https://guest:welcome2qauto@qauto.forstudy.space/");
+    await page.goto("/");
     //ACTION — clicks the button
     await page.getByRole('button',{name: 'Sign up'}).click();
     // assert
     await page.waitForTimeout(3000);
     await expect (page.getByRole('heading', {name: 'Registration'})).toBeVisible();
+    const regForm =page.getByRole('heading', {name: 'Registration'});//locator fro screenshots
+    await expect (regForm).toHaveScreenshot();
 
 })
 
@@ -33,7 +35,7 @@ test ('registration user -First name assertions ', async({page}) =>{
   await page.getByRole('button', { name: 'Sign up' }).click();
   await page.locator('#signupName').fill('a');
   await page.locator('#signupLastName').click();
-     await expect(page.getByText('Name has to be from 2 to 20')).toBeVisible();
+     await expect(page.getByText('Name has to be from 2 to 20')).toBeVisible({timeout:10000});//timeout added for practice
 
      await page.locator('#signupName').clear()
      await page.locator('#signupName').fill('@#$');
